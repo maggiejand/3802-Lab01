@@ -1,0 +1,27 @@
+clear; 
+clc;
+close all;
+
+% Analysis of Experimental Data
+
+data = load("Case 1 - load in center");
+load = data(2:52,1);
+F0 = data(2:52,1);
+F1 = data(2:52,3);
+F2 = data(2:52,4);
+
+figure (1)
+title("Applied Load Vs Support Forces");
+xlabel("Applied Load (lbs)")
+ylabel("Support Forces (lbf)")
+hold on;
+scatter(load,F0,'filled','red');
+F0_line = polyfit(load,F0,1);
+plot(load,polyval(F0_line,load),'red');
+scatter(load,F1);
+F1_line = polyfit(load,F1,1);
+plot(load,polyval(F1_line,load));
+scatter(load,F2);
+F2_line = polyfit(load,F2,1);
+plot(load,polyval(F2_line,load));
+legend("F0", "F1", "F2", 'location', 'northwest')
