@@ -73,8 +73,6 @@ allsel,all
 ! ---- Applied load (FIXED)
 nsel,s,loc,x,2.0
 
-*get,YMAX,node,0,max,y
-nsel,r,loc,y,YMAX
 
 f,all,fy,-111.2
 
@@ -88,5 +86,6 @@ finish
 /post1
 set,last
 prnsoll,u
+
 
 
