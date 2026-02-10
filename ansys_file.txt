@@ -7,7 +7,7 @@
 et,1,link180
 
 ! ---- Material
-mp,ex,1,70e9
+mp,ex,1,69.5e9
 mp,prxy,1,0.3
 
 ! ---- Section (area only for LINK)
@@ -90,3 +90,4 @@ finish
 /post1
 set,last
 prnsoll,u
+
