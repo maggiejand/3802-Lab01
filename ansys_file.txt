@@ -1,0 +1,92 @@
+! =========================
+! LATTICE BEAM MODEL
+! =========================
+/prep7
+
+! ---- Element type
+et,1,link180
+
+! ---- Material
+mp,ex,1,70e9
+mp,prxy,1,0.3
+
+! ---- Section (area only for LINK)
+sectype,1,link,,truss
+secdata,3.8e-5
+
+! ---- Nodes (DEFINITIONS)
+n,1,0,0,0
+n,18,0,0.25,0
+n,35,0,0.25,0.25
+n,52,0,0,0.25
+ngen,17,1,1,52,17,0.25,0,0,1
+
+! ---- Elements (CONNECTIVITY)
+E,1,2
+E,2,3
+E,18,19
+E,19,20
+E,35,36
+E,36,37
+E,52,53
+E,53,54
+E,1,18
+E,2,19
+E,18,35
+E,19,36
+E,35,52
+E,36,53
+E,52,1
+E,53,2
+E,1,35
+E,53,19
+E,18,36
+E,36,20
+E,52,36
+E,36,54
+E,52,2
+E,2,54
+E,18,2
+E,2,20
+
+Egen,8,2,all
+
+E,17,34
+E,34,51
+E,51,68
+E,68,17
+E,51,17
+
+! Left support: PIN
+nsel,s,loc,x,0
+d,all,ux,0
+d,all,uy,0
+d,all,uz,0
+
+! Right support: ROLLER
+nsel,s,loc,x,4.0
+d,all,uy,0
+d,all,uz,0
+
+allsel,all
+
+! ----------------------------
+! Applied load
+! P = 222.4 N total
+! Two top joints at midspan
+! P/2 = 111.2 N each
+! ----------------------------
+nsel,s,loc,x,2.0        ! midspan
+nsel,r,loc,y,MAX        ! top chord only
+f,all,fy,-111.2
+
+allsel,all
+finish
+
+/solu
+solve
+finish
+
+/post1
+set,last
+prnsoll,u
