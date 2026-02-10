@@ -70,14 +70,12 @@ d,all,uz,0
 
 allsel,all
 
-! ----------------------------
-! Applied load
-! P = 222.4 N total
-! Two top joints at midspan
-! P/2 = 111.2 N each
-! ----------------------------
-nsel,s,loc,x,2.0        ! midspan
-nsel,r,loc,y,MAX        ! top chord only
+! ---- Applied load (FIXED)
+nsel,s,loc,x,2.0
+
+*get,YMAX,node,0,max,y
+nsel,r,loc,y,YMAX
+
 f,all,fy,-111.2
 
 allsel,all
@@ -90,4 +88,5 @@ finish
 /post1
 set,last
 prnsoll,u
+
 
