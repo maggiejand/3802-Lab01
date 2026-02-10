@@ -1,0 +1,6 @@
+This command will display the beam vs the deflected beam 
+/post1
+set,last
+pldisp,2
+
+
