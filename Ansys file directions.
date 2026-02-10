@@ -3,4 +3,63 @@ This command will display the beam vs the deflected beam
 set,last
 pldisp,2
 
+This command will display the internal forces and label them 
+plnsol,f,axial
+etable,AXIAL,SMISC,1
+pretab,AXIAL
 
+This command will resart from the earlier work 
+/post1
+set,last
+This command will get the reaction forces
+fsum
+prrsol
+This will get the midspan deflection
+nsel,s,loc,x,2.0
+prnsoll,u
+allsel,all
+This will get the inline load cell 
+/pnum,elem,1
+eplot
+And this will get the inline load cell force 
+etable,LCELL,SMISC,1
+pretab,LCELL
+
+
+you could also just copy-paste this:
+! -------------------------------
+! Enter post-processing
+/post1
+set,last
+
+! -------------------------------
+! Plot undeformed vs deformed beam
+/eshape,1
+pldisp,2
+
+! -------------------------------
+! Plot internal axial forces
+plnsol,f,axial
+etable,AXIAL,SMISC,1
+pretab,AXIAL
+
+! -------------------------------
+! Reaction forces at supports
+fsum
+prrsol
+
+! -------------------------------
+! Midspan deflection (LVDT)
+nsel,s,loc,x,2.0
+prnsoll,u
+allsel,all
+
+! -------------------------------
+! Identify inline load cell element
+/pnum,elem,1
+eplot
+
+! -------------------------------
+! Inline load cell axial force
+etable,LCELL,SMISC,1
+pretab,LCELL
